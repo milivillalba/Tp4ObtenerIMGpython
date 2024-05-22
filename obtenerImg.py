@@ -26,8 +26,12 @@ def Obtener_Img(url):
         for img in imagenes:
             # Obtengo la URL de la imagen
             img_url = img.get('data-src')
-            # Descargo la imagen
-            descargar_img(img_url)
+            # Verifico si la URL es válida y si la imagen es de un formato permitido
+            if img_url and img_url.startswith('http') and img_url.lower().endswith(('.png', '.jpg', '.webp')):
+                # Descargo la imagen
+                descargar_img(img_url)
+            else:
+                print("Imagen no válida:", img_url)
     else:
         print(f"Error al obtener la página: {response.status_code}")
 
